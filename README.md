@@ -6,7 +6,7 @@ we are trying to create a real time tracking app which provide information about
 # collaborators 
 Dhruv Singh
 Abhishek Sharma
-Ayush Agarwal
+Ayush Agrawal
 Dev Sharma
 Gaurav Patel
 Priyanshi Sharma

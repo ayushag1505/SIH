@@ -30,8 +30,12 @@ const BusDetailDB = mongoose.model('BusDetailDB', BusDetails);
 
 
 // Map 
-app.get('/map', (req, res)=>{
-    res.render('map')
+app.get('/map', async (req, res)=>{
+	const fir = await BusDetailDB.find({});
+	console.log(fir);
+	const obj = fir[0];
+	console.log(obj);
+    res.render('map',{obj});
 })
 
 

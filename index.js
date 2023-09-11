@@ -3,6 +3,7 @@ const app= express() ;
 const mongoose= require('mongoose') ;
 const path= require('path')
 const methodOverride= require('method-override')
+const BusDetails = require('./models/BusDetailDB');
 
 
 app.set('view engine', 'ejs') ;
@@ -23,6 +24,7 @@ mongoose.connect('mongodb+srv://dhruvsingh235443:t1VAf70fOcOk887p@cluster0.mshqa
         console.log('Something Went Wrong') 
         console.log(err) 
     })
+const BusDetailDB = mongoose.model('BusDetailDB', BusDetails);
 
 
 

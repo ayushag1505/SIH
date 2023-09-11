@@ -44,6 +44,4 @@ const BusDetails = new mongoose.Schema({
     busStops: [busStopSchema]
 });
 
-const BusDetailDB = mongoose.model('BusDetailDB', BusDetails);
-
-module.exports = BusDetailDB;
+module.exports = BusDetails;

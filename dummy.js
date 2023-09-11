@@ -6,7 +6,6 @@ const busStopsData = [
     coOrdinates: {
       longitude: 27.2104,
       latitude: 78.0051
-	  // 27.2104° N, 78.0051
     }
   },
   {
@@ -27,9 +26,9 @@ const busStopsData = [
 
 // Dummy data for bus details
 const dummyBusDetails = {
-  BusNo: 'UP80XXXXXX',
-  DriverName: 'Rupesh Kumar',
-  ConductorName: 'Rajendra Kumar',
+  BusNo: 'UP70XXXXXX',
+  DriverName: 'Roy Kumar',
+  ConductorName: 'Raj Thakur',
   ConductorMobile: 8006000412,
   SeatsAvailable: 40,
   busStops: busStopsData

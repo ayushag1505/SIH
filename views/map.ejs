@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>directionscreatedrivingrouteHTML</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
+    </head>
+    <body>
+        <!--<div id='printoutPanel'></div>-->
+        
+        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+        <script type='text/javascript'>
+            function loadMapScenario() {
+               var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+    /* No need to set credentials if already passed in URL */
+    center: new Microsoft.Maps.Location(27.1767, 78.008072),
+    zoom: 12
+});
+
+Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+    // Set Route Mode to driving
+    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+
+    // Define fixed waypoints representing bus stops
+    var waypoints = [
+        new Microsoft.Maps.Directions.Waypoint({ address: 'Agra', location: new Microsoft.Maps.Location(27.1767, 78.008072) }),
+        new Microsoft.Maps.Directions.Waypoint({ address: 'Chhatikra, Mathura', location: new Microsoft.Maps.Location(27.5791, 77.6709) }),
+        new Microsoft.Maps.Directions.Waypoint({ address: 'Farah', location: new Microsoft.Maps.Location(27.3223, 77.7599) }),
+        new Microsoft.Maps.Directions.Waypoint({ address: 'Govardhan Chauraha, Mathura', location: new Microsoft.Maps.Location(27.5056, 77.6646) }),
+        new Microsoft.Maps.Directions.Waypoint({ address: 'Mathura', location: new Microsoft.Maps.Location(27.492413, 77.673676) })
+        // Add more waypoints for other stops as needed
+    ];
+
+    // Add waypoints to the directions manager
+    for (var i = 0; i < waypoints.length; i++) {
+        directionsManager.addWaypoint(waypoints[i]);
+    }
+
+    // Set the element in which the itinerary will be rendered
+    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+
+    // Calculate and display the fixed route
+    directionsManager.calculateDirections();
+});
+ 
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AgR0x_K2TMMF0_KRIeZLiaXmJqlK8pR17S7fBdxlhNhwZYtWRZbPz8YZmt_H5sjh&callback=loadMapScenario' async defer></script>
+    </body>
+</html>

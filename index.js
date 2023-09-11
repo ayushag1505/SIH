@@ -26,6 +26,13 @@ mongoose.connect('mongodb+srv://dhruvsingh235443:t1VAf70fOcOk887p@cluster0.mshqa
 
 
 
+
+// Map 
+app.get('/map', (req, res)=>{
+    res.render('map')
+})
+
+
 // Error Page
 app.get('*', (req, res)=>{
     res.send('Page Not Found!!!')

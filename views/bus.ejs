@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   
+
+/* CSS */
+.button-42 {
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 9;
+  border: 0;
+  transition: box-shadow .2s;
+}
+
+.button-42:hover {
+  box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+}
+</style>
+<link rel="stylesheet" href="styles.css">
+<body>
+    
+
+<section class="section__container trending__container" id="trending">
+    <div class="section__header">
+      <h2 class="section__title">Available Buses</h2>
+      <div class="section__nav">
+        <span><i class="ri-arrow-left-s-line"></i></span>
+        <span><i class="ri-arrow-right-s-line"></i></span>
+      </div>
+    </div>
+    <div class="trending__grid">
+        <% for (let object of results) { %>
+      <div class="trending__card">
+        <img src="https://beautytalkhomeblog.files.wordpress.com/2019/10/london-bus.jpg" alt="trending" />
+        <h1><%= object.BusNo %></h1>
+        <p>Hiking Our | Stoke On Trent</p>
+        <div class="trending__details">
+          <div class="price">
+            <p>From</p>
+            <h3>$1</h3>
+            <p>*Price varies</p>
+          </div>
+          <div class="trending__ratings">
+            <div>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-fill"></i></span>
+              <span><i class="ri-star-half-fill"></i></span>
+              <span><i class="ri-star-line"></i></span>
+            </div>
+            <p>4.8 (10)</p>
+          </div>
+        </div>
+        <h5>
+          <span><i class="ri-time-line"></i></span>   <a href="map/show/<%=object._id%>"><button class="button-42" >View Details</button></a>
+        </h5>
+        <p>
+          <span><i class="ri-check-line"></i></span>SeatsAvailable :<%= object.SeatsAvailable %>
+        </p>
+      </div>
+      <% } %>
+      
+    </div>
+  </section>

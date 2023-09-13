@@ -29,12 +29,12 @@
 			Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
 			var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 			directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-    var object = <%- JSON.stringify(obj.busStops) %>;
+    const object = <%-JSON.stringify(obj.busStops) %>;
     var waypoints = [];
 	for(let waypoint of object){
 		waypoints.push(new Microsoft.Maps.Directions.Waypoint({
         address: waypoint.address,
-        location: new Microsoft.Maps.Location(waypoint.coOrdinates.longitude, waypoint.coOrdinates.latitude)
+        location: new Microsoft.Maps.Location(waypoint.coOrdinates.latitude, waypoint.coOrdinates.longitude)
     }));
 	}
 	console.log(waypoints);

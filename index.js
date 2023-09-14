@@ -1,42 +1,101 @@
 const express= require('express')
 const app= express() ;
-const mongoose= require('mongoose') ;
+const mongoose= require('mongoose');
 const path= require('path')
 const methodOverride= require('method-override')
 const BusDetails = require('./models/BusDetailDB');
+const bcrypt=require("bcrypt");
+const { Int32 } = require('bson');
+const Schema = mongoose.Schema;
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/UserDB')
 
 
-app.set('view engine', 'ejs') ;
-app.set('views', path.join(__dirname, '/views'))
-
-// MiddleWare
-app.use(express.static(path.join(__dirname, '/public')))
-app.use(express.urlencoded({extended: true}))
+const session = require('express-session');
+// body parser
+app.use(express.urlencoded({ extended: true })); //for form data
 app.use(methodOverride('_method'))
 
+let configSesion = {
+    secret: 'SIH',
+    resave: false,
+    saveUninitialized: true,
+}
 
-// MongoDB Connection
-mongoose.connect('mongodb+srv://dhruvsingh235443:t1VAf70fOcOk887p@cluster0.mshqacv.mongodb.net/?retryWrites=true&w=majority')
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
+app.use(session(configSesion));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'))
+app.use(express.static(path.join(__dirname, '/public')));
+
+mongoose.connect('mongodb+srv://dhruvsingh235443:BFMX2t0GxU6eEWkq@cluster0.sfxysuk.mongodb.net/?retryWrites=true&w=majority')
     .then(()=>{
         console.log('DB connected')
     })
     .catch((err)=>{
-        console.log('Something Went Wrong') 
-        console.log(err) 
-    })
-const BusDetailDB = mongoose.model('BusDetailDB', BusDetails);
-
-
-
-
-// Map 
-app.get('/map', async (req, res)=>{
-	const fir = await BusDetailDB.find({});
-	console.log(fir);
-	const obj = fir[0];
-	console.log(obj);
-    res.render('map',{obj});
+        console.log('Ye ni chal rha ') 
 })
+// t1VAf70fOcOk887p
+// mongodb+srv://dhruvsingh235443:<password>@cluster0.sfxysuk.mongodb.net/?retryWrites=true&w=majority
+// const User = require('./models/UserDB');
+
+app.get('/signup', (req, res)=>{
+    res.render('signup')
+})
+app.post("/signup", async (req, res) => {
+  console.log(req.body);
+  let { username, mobileno, age, email, password } = req.body;
+    // const user = new User({ email, username });
+	console.log(username,mobileno,age,email,password);
+
+    try{
+	const newUser = await User.register({username:username,mobileno:mobileno,age:age,email:email}, password);
+    res.redirect('/login');
+    console.log('User registered successfully');
+  } catch (err) {
+    console.error('Error registering user:', err);
+    res.status(500).send('Error registering user');
+  }
+});
+
+
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/login'
+}),
+    function (req, res) {
+        res.redirect('/home');
+    })
+app.get('/logout', function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.redirect('/login');
+    });
+});
+
+// MongoDB Connection
+const BusDetailDB = mongoose.model("BusDetailDB",BusDetails);
+app.get('/home', (req, res) => {
+  const existingUser = req.user;
+  res.render('home', { existingUser });
+});
 
 
 // Error Page

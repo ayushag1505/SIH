@@ -17,24 +17,24 @@ const busStopSchema = new mongoose.Schema({
 const BusDetails = new mongoose.Schema({
     BusNo: {
         type: String,
-        required: true
+        required: true,
+		unique:true
     },
-
     DriverName: {
         type: String,
         required: true
     },
-
     ConductorName: {
         type: String,
         required: true
     },
-
     ConductorMobile: {
         type : Number ,
         required: true 
     },
-
+	isLoggedIn: {
+		type:Boolean,
+	},
     SeatsAvailable: {
         type: Number,
         required: true,

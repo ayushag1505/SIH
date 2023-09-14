@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/sytle.css" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Popins", sans-serif;
+        font-weight: 500;
+      }
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #6f6df4, #4c46f5);
+      }
+      .container {
+        background-color: #fff;
+        width: 70%;
+        min-width: 420px;
+        padding: 35px 50px;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 10px;
+        box-shadow: 20px 30px 25px rgba(0, 0, 0, 0.15);
+      }
+      h1 {
+        font-size: 30px;
+        text-align: center;
+        color: black;
+        text-transform: uppercase;
+      }
+      p {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+        color: #606060;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      form {
+        width: 100%;
+        position: relative;
+        margin: 30px auto 0 auto;
+      }
+      .row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 20px 30px;
+        margin-bottom: 20px;
+      }
+      label {
+        color: #1c093c;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      textarea,
+      input {
+        width: 100%;
+        font-weight: 400;
+        padding: 8px 10px;
+        border-radius: 5px;
+        border: 1.2px solid #c4cae0;
+        margin-top: 5px;
+      }
+      textarea {
+        resize: none;
+      }
+      textarea:focus,
+      input:focus {
+        outline: none;
+        border-color: #6f6df4;
+      }
+      button {
+        border: none;
+        padding: 10px 20px;
+        background: linear-gradient(130deg, #6f6df4, #4c46f5);
+        border-radius: 3px;
+        color: #fff;
+      }
+      button:hover{
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>fill your details</h1>
+      <form action="/signup" method="POST">
+        <div class="row">
+          <div class="col">
+            <label for="username">Username</label>
+            <input type="text" id="usernam" placeholder="Your Username Here" name="username" required/>
+          </div>
+          <div class="col">
+            <label for="email">Email</label>
+            <input type="email" id="emai" placeholder="Your Email Here" name="email" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Your Age Here" name="age" required/>
+          </div>
+          <div class="col">
+            <label for="mobileno">MobileNo</label>
+            <input
+              type="tel"
+              id="mobilen"
+              placeholder="Your Mobile Number Here"
+              required
+			  name="mobileno"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="password">Password</label>
+            <input type="password" id="passwor" placeholder="Your Password Here" name="password"required/>
+          </div>
+          <div class="col">
+            <label for="con_password">Confirm Password</label>
+            <input type="password" id="con_password" placeholder="Re-Type Password Here" required/>
+          </div>
+        </div>
+        <button type="submit">Sign Me Up</button>
+      </form>
+    </div>
+  </body>
+</html>

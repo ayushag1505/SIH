@@ -17,31 +17,6 @@ const session = require('express-session');
 app.use(express.urlencoded({ extended: true })); //for form data
 app.use(methodOverride('_method'));
 
-app.post('/search', async (req, res) => {
-    const search = req.body.search;
-    const destination = req.body.destination;
-
-    try {
-        const results = await BusDetailDB.find({
-            $and: [
-                { 'busStops.address': search },
-                { 'busStops.address': destination }
-            ]
-        },'-i');
-
-        // Now 'results' contains documents where both 'search' and 'destination' are present in 'busStops'
-        console.log(results);
-
-        // Render the results to a view or send them as JSON response
-        res.render("bus", { results });
-    } catch (err) {
-        console.error('Error searching bus details:', err);
-        // Handle the error
-        res.status(500).send('Error searching bus details');
-    }
-});
-
-
 let configSesion = {
     secret: 'SIH',
     resave: false,
@@ -114,10 +89,31 @@ app.get('/logout', function (req, res, next) {
 const BusDetailDB = mongoose.model("BusDetailDB",BusDetails);
 app.get('/home', (req, res) => {
   const existingUser = req.user;
-  res.render('home', { existingUser });
+  res.render('search', { existingUser });
 });
 
+app.post('/home', async (req, res) => {
+    const search = req.body.search;
+    const destination = req.body.destination;
 
+    try {
+        const results = await BusDetailDB.find({
+            $and: [
+                { 'busStops.address': search },
+                { 'busStops.address': destination }
+            ]});
+
+        // Now 'results' contains documents where both 'search' and 'destination' are present in 'busStops'
+        console.log(results);
+
+        // Render the results to a view or send them as JSON response
+        res.render("bus", { results });
+    } catch (err) {
+        console.error('Error searching bus details:', err);
+        // Handle the error
+        res.status(500).send('Error searching bus details');
+    }
+});
 
 
 

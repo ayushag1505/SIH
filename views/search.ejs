@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>FindRide</title>
+  </head>
+  <body style="color:black;">
+    <header class="header">
+      <nav style="color:black;">
+        <div class="nav__logo"style="color:black;"><a href="#">FindRide</a></div>
+        <ul class="nav__links">
+          <li class="link"><a href="#home">Home</a></li>
+          <li class="link"><a href="#trending">Login</a></li>
+          <li class="link"><a href="#destination">Destinations</a></li>
+        </ul>
+      </nav>
+      <div class="section__container header__container" id="home">
+        <h1>Search for Available buses</h1>
+        <div class="header__form">
+          <form action="/home" method="POST">
+            <div class="input__group">
+              <label for="destination">Enter current Location</label>
+              <input type="text" name="search" placeholder="city"/>
+            </div>
+            <div class="input__group">
+              <label for="checkIn">where you want to go</label>
+              <input type="text" placeholder="destination" name="destination"/>
+            </div>
+          
+            <button class="btn" type="submit">CHECK AVAILABILITY</button>
+          </form>
+        </div>
+      </div>
+    </header>

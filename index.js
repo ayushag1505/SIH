@@ -15,15 +15,38 @@ const User = require('./models/UserDB')
 const session = require('express-session');
 // body parser
 app.use(express.urlencoded({ extended: true })); //for form data
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method');
+
+app.post('/search', async (req, res) => {
+    const search = req.body.search;
+    const destination = req.body.destination;
+
+    try {
+        const results = await BusDetailDB.find({
+            $and: [
+                { 'busStops.address': search },
+                { 'busStops.address': destination }
+            ]
+        },'-i');
+
+        // Now 'results' contains documents where both 'search' and 'destination' are present in 'busStops'
+        console.log(results);
+
+        // Render the results to a view or send them as JSON response
+        res.render("bus", { results });
+    } catch (err) {
+        console.error('Error searching bus details:', err);
+        // Handle the error
+        res.status(500).send('Error searching bus details');
+    }
+});
+
 
 let configSesion = {
     secret: 'SIH',
     resave: false,
     saveUninitialized: true,
 }
-
-
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
@@ -54,6 +77,8 @@ mongoose.connect('mongodb+srv://dhruvsingh235443:BFMX2t0GxU6eEWkq@cluster0.sfxys
 // mongodb+srv://dhruvsingh235443:<password>@cluster0.sfxysuk.mongodb.net/?retryWrites=true&w=majority
 // const User = require('./models/UserDB');
 
+>>>>>>> main
+
 app.get('/signup', (req, res)=>{
     res.render('signup')
 })
@@ -72,7 +97,6 @@ app.post("/signup", async (req, res) => {
     res.status(500).send('Error registering user');
   }
 });
-
 
 app.get('/login', (req, res) => {
     res.render('login');
@@ -98,13 +122,35 @@ app.get('/home', (req, res) => {
 });
 
 
-// Error Page
-app.get('*', (req, res)=>{
-    res.send('Page Not Found!!!')
+
+
+
+
+app.get('/map/show/:id',async (req,res)=>{
+    let {id} = req.params;
+    let obj = await BusDetailDB.findById(id);
+    res.render('map',{obj});
+}
+const port = 8080 || 8000;
+app.listen(port,(req,res)=>{
+    console.log("connected succesfully")
 })
 
 
-// Port Connection
-app.listen(8000, (req, res)=>{
-    console.log("port Connected at 8000")
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

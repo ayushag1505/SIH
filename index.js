@@ -15,7 +15,7 @@ const User = require('./models/UserDB')
 const session = require('express-session');
 // body parser
 app.use(express.urlencoded({ extended: true })); //for form data
-app.use(methodOverride('_method');
+app.use(methodOverride('_method'));
 
 app.post('/search', async (req, res) => {
     const search = req.body.search;
@@ -77,8 +77,6 @@ mongoose.connect('mongodb+srv://dhruvsingh235443:BFMX2t0GxU6eEWkq@cluster0.sfxys
 // mongodb+srv://dhruvsingh235443:<password>@cluster0.sfxysuk.mongodb.net/?retryWrites=true&w=majority
 // const User = require('./models/UserDB');
 
->>>>>>> main
-
 app.get('/signup', (req, res)=>{
     res.render('signup')
 })
@@ -86,8 +84,6 @@ app.post("/signup", async (req, res) => {
   console.log(req.body);
   let { username, mobileno, age, email, password } = req.body;
     // const user = new User({ email, username });
-	console.log(username,mobileno,age,email,password);
-
     try{
 	const newUser = await User.register({username:username,mobileno:mobileno,age:age,email:email}, password);
     res.redirect('/login');
@@ -130,7 +126,7 @@ app.get('/map/show/:id',async (req,res)=>{
     let {id} = req.params;
     let obj = await BusDetailDB.findById(id);
     res.render('map',{obj});
-}
+});
 const port = 8080 || 8000;
 app.listen(port,(req,res)=>{
     console.log("connected succesfully")

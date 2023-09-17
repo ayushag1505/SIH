@@ -139,6 +139,11 @@ app.get('/api/bus', async (req, res) => {
     }
 });
 
+app.get('/api/map/:id',async (req,res)=>{
+	let {id} = req.params;
+	let obj = await BusDetailDB.findById(id);
+	res.status(200).json({obj});
+})
 
 
 app.get('/map/show/:id',async (req,res)=>{
@@ -146,6 +151,7 @@ app.get('/map/show/:id',async (req,res)=>{
     let obj = await BusDetailDB.findById(id);
     res.render('map',{obj});
 });
+
 const port = 8080 || 8000;
 app.listen(port,(req,res)=>{
     console.log("connected succesfully")

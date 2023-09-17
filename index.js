@@ -115,6 +115,29 @@ app.post('/home', async (req, res) => {
     }
 });
 
+app.get('/api/bus', async (req, res) => {
+    const search = req.query.search;
+    const destination = req.query.destination;
+
+    try {
+        const results = await BusDetailDB.find({
+            $and: [
+                { 'busStops.address': search },
+                { 'busStops.address': destination }
+            ]
+        });
+
+        // Now 'results' contains documents where both 'search' and 'destination' are present in 'busStops'
+        console.log("some one run this");
+
+        // Return the results as JSON
+        res.status(200).json({ results });
+    } catch (err) {
+        console.error('Error searching bus details:', err);
+        // Handle the error
+        res.status(500).json({ error: 'Error searching bus details' });
+    }
+});
 
 
 

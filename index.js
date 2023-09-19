@@ -41,6 +41,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(path.join(__dirname, '/public')));
 
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
+
 mongoose.connect('mongodb+srv://dhruvsingh235443:BFMX2t0GxU6eEWkq@cluster0.sfxysuk.mongodb.net/?retryWrites=true&w=majority')
     .then(()=>{
         console.log('DB connected')
@@ -84,6 +91,16 @@ app.get('/logout', function (req, res, next) {
         res.redirect('/login');
     });
 });
+
+
+app.get('/profile', async (req, res)=>{
+    let userfake= await User.find({}) ;
+    if(req.isAuthenticated()){
+        res.render('profile',{userfake});
+    } else{
+        res.render('home', {userfake}) ;
+    }
+})
 
 // MongoDB Connection
 const BusDetailDB = mongoose.model("BusDetailDB",BusDetails);

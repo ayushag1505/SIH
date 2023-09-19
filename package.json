@@ -1,15 +1,15 @@
 {
   "name": "sih",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Project is being developed under the Smart INDIA HACKATHON \r # PROBLEM WE ARE SOLVING\r we are trying to create a real time tracking app which provide information about the Available Public Transportation in the user region \r # MOTIVATION\r # collaborators \r Dhruv Singh\r Abhishek Sharma\r Ayush Agrawal\r Dev Sharma\r Gaurav Patel\r Priyanshi Sharma\r # installation\r install the project the cloning the branch to the specified folder\r then\r `npm install` \r `npm start`\r project would be live at http://localhost:8000/",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-	"node": ">=14.20.1" 
-},
+    "node": ">=14.20.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

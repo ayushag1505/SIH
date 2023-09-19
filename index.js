@@ -94,10 +94,8 @@ app.get('/logout', function (req, res, next) {
 
 
 app.get('/profile', async (req, res)=>{
-    let userfake= await User.find({}) ;
-    console.log(userfake) ;
     if(req.isAuthenticated()){
-        res.render('profile',{userfake});
+        res.render('profile');
     } else{
         res.send("<h1>You are not logged in</h1>")
     }
